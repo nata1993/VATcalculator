@@ -3,10 +3,14 @@ package com.peeduli.vatcaculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,10 +33,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCalculate(View view) {
         try{
-            
+            double price = Double.parseDouble(prices.getText().toString());
+            double unit = Double.parseDouble(units.getText().toString());
+
+            if(price > 0 && unit > 0)
+            {
+                double exAmount = price * unit;
+                double VAT = exAmount * 0.2;
+                double inAmount = exAmount + VAT;
+
+                if(((RadioButton) findViewById(R.id.rbtnIncvat)).isChecked())
+                {
+                    VAT = exAmount * 0.2;
+                    inAmount = exAmount;
+                    exAmount -= VAT;
+                }
+
+                vat.setText(NumberFormat.getInstance().format(VAT));
+                exVat.setText(NumberFormat.getInstance().format(exAmount));
+                inVat.setText(NumberFormat.getInstance().format(inAmount));
+            }
+
         }
         catch (IllegalArgumentException ex){
-            Toast.makeText( this, "", Toast.LENGTH_SHORT).show();
+            // toast and snackbar used to inform user with messages
+            Toast.makeText( this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
