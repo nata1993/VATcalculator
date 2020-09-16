@@ -7,7 +7,6 @@
     <string name="upevat">Unit price without VAT</string>
     <string name="upinvat">Unit price with VAT</string>
     <string name="btnCalculate">Calculate</string>
-    <string name="btnCalculate">Calculate</string>
     <string name="btnClear">Clear</string>
     <string name="amvat">Amount excluding VAT</string>
     <string name="vat">VAT</string>
